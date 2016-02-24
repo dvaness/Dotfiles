@@ -1,0 +1,19 @@
+out_to_x no
+own_window no
+out_to_console yes
+background no
+max_text_width 0
+# Update interval in seconds
+update_interval 0.40
+total_run_times 0
+override_utf8_locale yes
+
+TEXT
+
+[ { "full_text" : "${time %b %d %Y %I:%M%P}","color" : "\#cc9393" },
+  {"full_text" : "HD ${fs_free}/${fs_size}", "color": "\#88b090"},
+  { "full_text"  : "BAT ${battery_short}", "color" : "\#8cd0d3"},
+  { "full_text" : "MPD" , "color" : "\#dfaf8f" } ,
+  { "full_text" : "${if_mpd_playing}${mpd_smart 50} ${mpd_elapsed}/${mpd_length}${else}${mpd_status}${endif}","color" : "\#9f9f9f"   }  ],
+ 
+

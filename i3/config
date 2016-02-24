@@ -1,0 +1,269 @@
+# Font for window titles. Will also be used by the bar unless a different font
+#font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+
+font xft:GohuFont 11
+
+################## Variables #####################################
+set $mod Mod1
+set $blue #005588
+set $gray1 #484848
+set $gray2 #333333
+set $background "~/Pictures/1418006764243.jpg"
+
+set $bg     #2c2c2e
+set $fg     #9f9f9f
+set $hi     #efef8f
+set $ac     #a0afa0
+set $tx     #040404
+set $ia     #8f8f8f
+set $be     #8faf9f
+set $yw     #ccdc90
+set $gn     #88b090
+set $rd     #e89393
+set $term   #3F9733
+set $blu    #524C59
+##################################################################
+
+################## Startup Programs ##############################
+exec --no-startup-id firefox
+exec --no-startup-id sublime-text
+exec --no-startup-id i3-msg 'workspace $WS3; exec i3-sensible-terminal'
+exec_always --no-startup-id feh --bg-scale ~/Pictures/pixeltrees.jpg
+exec --no-startup-id i3-msg 'workspace $WS5; exec skype'
+exec --no-startup-id dropbox start
+exec --no-startup-id mpd
+
+##################################################################
+
+################## Program Hotkeys ###############################
+bindsym Mod4+1 exec firefox
+bindsym Mod4+2 exec sublime-text
+bindsym Mod4+Return exec i3-sensible-terminal
+bindsym $mod+d exec dmenu_run
+bindsym Mod4+3 exec ncmpcpp
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 -- +10% && killall -SIGUSR1 i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -- -10% && killall -SIGUSR1 i3status
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle
+##################################################################
+
+################## Workspaces ####################################
+set $WS1 www
+set $WS2 code
+set $WS3 term
+set $WS4 music
+set $WS5 skype
+set $WS6 blank
+
+##################################################################
+
+################## Switch to Workspaces ##########################
+bindsym $mod+Tab workspace back_and_forth
+bindsym $mod+1 workspace $WS1
+bindsym $mod+2 workspace $WS2
+bindsym $mod+3 workspace $WS3
+bindsym $mod+4 workspace $WS4
+bindsym $mod+5 workspace $WS5
+bindsym $mod+6 workspace $WS6
+#bindsym $mod+7 workspace 7
+#bindsym $mod+8 workspace 8
+#bindsym $mod+9 workspace 9
+#bindsym $mod+0 workspace 10
+
+##################################################################
+
+################## Move focused container to workspace ###########
+bindsym $mod+Shift+1 move container to workspace $WS1
+bindsym $mod+Shift+2 move container to workspace $WS2
+bindsym $mod+Shift+3 move container to workspace $WS3
+bindsym $mod+Shift+4 move container to workspace $WS4
+bindsym $mod+Shift+5 move container to workspace $WS5
+bindsym $mod+Shift+6 move container to workspace $WS6
+#bindsym $mod+Shift+7 move container to workspace 7
+#bindsym $mod+Shift+8 move container to workspace 8
+#bindsym $mod+Shift+9 move container to workspace 9
+#bindsym $mod+Shift+0 move container to workspace 10
+
+##################################################################
+
+################## Move workspace to monitor #####################
+bindsym $mod+Control+h move workspace to output left
+bindsym $mod+Control+j move workspace to output down
+bindsym $mod+Control+k move workspace to output up
+bindsym $mod+Control+l move workspace to output right
+##################################################################
+
+################## Program Assignments ###########################
+assign [class="Chromium|Firefox"] $WS1
+assign [class="sublime-text|Atom"] $WS2
+assign [class="skype"] $WS5
+for_window[instance="skype"] floating enable
+for_window[instance="gnome-terminal"] floating enable
+for_window[instance="vlc"] floating enable
+for_window[instance="keepassx"] floating enable
+#for_window[role="pop-up"] floating enable
+for_window [class="conky"] floating enable
+#assign [instance="gnome-terminal"] $WS3
+#assign [class="i3-sensible-terminal"] $WS3
+
+
+
+##################################################################
+
+################## Colors ########################################
+# set some nice colors      border     background  text
+client.focused              $term      $ac         $tx
+client.unfocused            $bg        $bg         $ia
+client.focused_inactive     $bg        $bg         $ac
+client.urgent               $rd        $rd         $tx
+
+##################################################################
+
+# hide window border
+for_window [class="^.*"] border pixel 1
+hide_edge_borders both
+
+# use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# kill focused window
+bindsym $mod+Shift+q kill
+
+# change focus
+bindsym $mod+j focus left
+bindsym $mod+k focus down
+bindsym $mod+l focus up
+bindsym $mod+semicolon focus right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+j move left
+bindsym $mod+Shift+k move down
+bindsym $mod+Shift+l move up
+bindsym $mod+Shift+semicolon move right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+h split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# focus the child container
+#bindsym $mod+d focus child
+
+# move the currently focused window to the scratchpad
+bindsym $mod+Shift+minus move scratchpad
+
+#lockscreen
+bindsym Mod4+l exec i3lock -c 484848
+
+# Show the next scratchpad window or hide the focused scratchpad window.
+# If there are multiple scratchpad windows, this command cycles through them.
+bindsym $mod+minus scratchpad show
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym j           resize shrink width 10 px or 10 ppt
+        bindsym k           resize grow height 10 px or 10 ppt
+        bindsym l           resize shrink height 10 px or 10 ppt
+        bindsym semicolon   resize grow width 10 px or 10 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left        resize shrink width 10 px or 10 ppt
+        bindsym Down        resize grow height 10 px or 10 ppt
+        bindsym Up          resize shrink height 10 px or 10 ppt
+        bindsym Right       resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+#bar 
+#{
+     #position top
+     #font xft: GohuFont 9
+     #status_command i3status
+     #status_command ~/scripts/title.sh
+     #colors
+     #{
+        #background $gray2
+        #focused_workspace $gray2 $gray2 #FFFFFF
+        #inactive_workspace $gray1 $gray1 #AAAAAA
+     #}
+     #status_command $HOME/conkystart.sh
+     
+     
+#}
+
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+bar {
+    mode dock
+    position top
+    workspace_buttons yes
+    
+    #status_command i3status --config /etc/i3status.conf
+    #status_command ~/Code/i3bar.py
+    #status_command ~/.usr.sh
+    #position top
+    #status_command ~/conky
+    font xft: GohuFont 9
+    status_command ~/.i3/conky.sh
+
+    colors {
+        background          $bg
+        statusline          $fg
+        separator           $hi
+        focused_workspace   $fg        $blu       $ac
+        active_workspace    $gn        $ac        $tx
+        inactive_workspace  $bg        $bg        $ia
+        urgent_workspace    $rd        $bg        $ac
+    }
+}

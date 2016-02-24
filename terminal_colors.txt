@@ -1,0 +1,13 @@
+Font: GohuFont 9
+cursor shape: underline
+background: solid color
+
+background: #3F3F3F
+text color: #DCDCCC
+bold color: #E3CEAB
+
+colorpallete
+-------------
+1st line: #3F3F3F -> #CC9393->#7F9F7F->#E3CEAB->#DFAF8F->#CC9393->#8CD0D3->#DCDCCC
+2nd line: #3F3F3F -> #CC9393->#7F9F7F->#E3CEAB->#DFAF8F->#CC9393->#8CD0D3->#DCDCCC
+
